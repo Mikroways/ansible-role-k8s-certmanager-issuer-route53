@@ -1,1 +1,19 @@
 ---
+certmanager_issuer_route53_enabled: true
+certmanager_issuer_route53_issuers:
+  - name: letsencrypt-prod
+    enabled: true
+    accessKeyID: ''
+    secretKeyID: ''
+    hostedZoneID: ''
+    region: ''
+    email: ''
+    server: https://acme-v02.api.letsencrypt.org/directory
+  - name: letsencrypt-staging
+    enabled: ''
+    accessKeyID: ''
+    secretKeyID: ''
+    hostedZoneID: ''
+    region: ''
+    email: ''
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
