@@ -2,7 +2,7 @@
 
 - name: install cluster issuers
   k8s:
-    state: "{{ 'present' if certmanager_issuer_route53_enabled else 'absent' }}"
+    state: "{{ 'present' if item.enabled else 'absent' }}"
     definition:
       apiVersion: certmanager.k8s.io/v1alpha1
       kind: ClusterIssuer
@@ -25,10 +25,11 @@
             name: "{{ item.name }}"
           server: "{{ item.server }}"
   with_items: certmanager_issuer_route53_issuers
+  when: 'present' if certmanager_issuer_route53_enabled else 'absent'
 
 - name: install secret key
   k8s:
-    state: "{{ 'present' if certmanager_issuer_route53_enabled else 'absent' }}"
+    state: "{{ 'present' if item.enabled else 'absent' }}"
     definition:
       apiVersion: v1
       data:
@@ -39,3 +40,4 @@
         namespace: "{{ certmanager_namespace }}"
       type: Opaque
   with_items: certmanager_issuer_route53_issuers
+  when: 'present' if certmanager_issuer_route53_enabled else 'absent'
