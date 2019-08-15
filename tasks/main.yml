@@ -25,7 +25,7 @@
             name: "{{ item.name }}"
           server: "{{ item.server }}"
   with_items: certmanager_issuer_route53_issuers
-  when: 'present' if certmanager_issuer_route53_enabled else 'absent'
+  when: "{{'present' if certmanager_issuer_route53_enabled else 'absent'}}"
 
 - name: install secret key
   k8s:
@@ -40,4 +40,4 @@
         namespace: "{{ certmanager_namespace }}"
       type: Opaque
   with_items: certmanager_issuer_route53_issuers
-  when: 'present' if certmanager_issuer_route53_enabled else 'absent'
+  when: "{{'present' if certmanager_issuer_route53_enabled else 'absent'}}"
