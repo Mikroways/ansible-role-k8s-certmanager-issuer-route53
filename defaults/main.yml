@@ -1,5 +1,6 @@
 ---
 certmanager_issuer_route53_enabled: true
+certmanager_namespace: 'cert-manager'
 certmanager_issuer_route53_issuers:
   - name: letsencrypt-prod
     enabled: true

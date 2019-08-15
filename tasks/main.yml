@@ -1,28 +1,41 @@
 ---
 
-galaxy_info:
-  role_name: k8s_certmanager_issuer_route53
-  author: 'Matias Ferrigno'
-  description: 'Install externaldns and deploy on k8s'
-  company: 'Mikroways'
-  license: 'GPL-3.0'
-  min_ansible_version: '2.0.0'
+- name: install cluster issuers
+  k8s:
+    state: "{{ 'present' if certmanager_issuer_route53_enabled else 'absent' }}"
+    definition:
+      apiVersion: certmanager.k8s.io/v1alpha1
+      kind: ClusterIssuer
+      metadata:
+        name: "{{ item.name }}"
+      spec:
+        acme:
+          dns01:
+            providers:
+            - name: "{{ item.name }}-route53"
+              route53:
+                accessKeyID: "{{ item.accessKeyID }}"
+                hostedZoneID: "{{ item.hostedZoneID }}"
+                region: "{{ item.region }}"
+                secretAccessKeySecretRef:
+                  key: secret-access-key
+                  name: "{{ item.name }}-route53"
+          email: "{{ item.email }}"
+          privateKeySecretRef:
+            name: "{{ item.name }}"
+          server: "{{ item.server }}"
+  with_items: certmanager_issuer_route53_issuers
 
-  platforms:
-
-    - name: 'Ubuntu'
-      versions: [ 'all' ]
-
-    - name: 'Debian'
-      versions: [ 'all' ]
-    
-    - name: 'RedHat'
-      versions: [ '7' ]
-
-  galaxy_tags:
-    - kubernetes
-    - certmanager
-    - route53
-
-dependencies:
-- matiferrigno.k8s_base
+- name: install secret key
+  k8s:
+    state: "{{ 'present' if certmanager_issuer_route53_enabled else 'absent' }}"
+    definition:
+      apiVersion: v1
+      data:
+        secret-access-key: "{{ item.secretKeyID | b64encode }}"
+      kind: Secret
+      metadata:
+        name: "{{ item.name}}-route53"
+        namespace: "{{ certmanager_namespace }}"
+      type: Opaque
+  with_items: certmanager_issuer_route53_issuers

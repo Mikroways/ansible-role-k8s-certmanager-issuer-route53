@@ -1,0 +1,28 @@
+---
+
+galaxy_info:
+  role_name: k8s_certmanager_issuer_route53
+  author: 'Matias Ferrigno'
+  description: 'Install externaldns and deploy on k8s'
+  company: 'Mikroways'
+  license: 'GPL-3.0'
+  min_ansible_version: '2.0.0'
+
+  platforms:
+
+    - name: 'Ubuntu'
+      versions: [ 'all' ]
+
+    - name: 'Debian'
+      versions: [ 'all' ]
+    
+    - name: 'RedHat'
+      versions: [ '7' ]
+
+  galaxy_tags:
+    - kubernetes
+    - certmanager
+    - route53
+
+dependencies:
+- matiferrigno.k8s_base
