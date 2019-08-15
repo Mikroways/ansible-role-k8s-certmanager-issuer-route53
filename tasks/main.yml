@@ -24,7 +24,7 @@
           privateKeySecretRef:
             name: "{{ item.name }}"
           server: "{{ item.server }}"
-  with_items: certmanager_issuer_route53_issuers
+  with_items: "{{ certmanager_issuer_route53_issuers }}"
   when: certmanager_issuer_route53_enabled
 
 - name: install secret key
@@ -39,5 +39,5 @@
         name: "{{ item.name}}-route53"
         namespace: "{{ certmanager_namespace }}"
       type: Opaque
-  with_items: certmanager_issuer_route53_issuers
+  with_items: "{{ certmanager_issuer_route53_issuers }}"
   when: certmanager_issuer_route53_enabled
