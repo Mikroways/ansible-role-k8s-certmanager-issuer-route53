@@ -25,4 +25,4 @@ galaxy_info:
     - route53
 
 dependencies:
-- matiferrigno.k8s_base
+- mikroways.k8s_base
