@@ -1,7 +1,7 @@
 ---
 
 galaxy_info:
-  role_name: k8s_certmanager_issuer_route53
+  role_name: m7s_certmanager_issuer_route53
   author: 'Matias Ferrigno'
   description: 'Install externaldns and deploy on k8s'
   company: 'Mikroways'
@@ -25,4 +25,4 @@ galaxy_info:
     - route53
 
 dependencies:
-- mikroways.k8s_base
+- mikroways.m7s_base
