@@ -24,8 +24,8 @@
           privateKeySecretRef:
             name: "{{ item.name }}"
           server: "{{ item.server }}"
-  with_items: "{{ m7s_certmanager_issuer_route53_issuers }}"
-  when: m7s_certmanager_issuer_route53_enabled
+  with_items: "{{ m7s_k8s_certmanager_issuer_route53_issuers }}"
+  when: m7s_k8s_certmanager_issuer_route53_enabled
 
 - name: install secret key
   k8s:
@@ -37,7 +37,7 @@
       kind: Secret
       metadata:
         name: "{{ item.name}}-route53"
-        namespace: "{{ m7s_certmanager_namespace }}"
+        namespace: "{{ m7s_k8s_certmanager_namespace }}"
       type: Opaque
-  with_items: "{{ m7s_certmanager_issuer_route53_issuers }}"
-  when: m7s_certmanager_issuer_route53_enabled
+  with_items: "{{ m7s_k8s_certmanager_issuer_route53_issuers }}"
+  when: m7s_k8s_certmanager_issuer_route53_enabled

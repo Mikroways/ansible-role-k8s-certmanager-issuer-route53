@@ -1,7 +1,7 @@
 ---
 
 galaxy_info:
-  role_name: m7s_certmanager_issuer_route53
+  role_name: m7s_k8s_certmanager_issuer_route53
   author: 'Matias Ferrigno'
   description: 'Install externaldns and deploy on k8s'
   company: 'Mikroways'
@@ -9,13 +9,10 @@ galaxy_info:
   min_ansible_version: '2.0.0'
 
   platforms:
-
     - name: 'Ubuntu'
       versions: [ 'all' ]
-
     - name: 'Debian'
       versions: [ 'all' ]
-    
     - name: 'RedHat'
       versions: [ '7' ]
 
@@ -25,4 +22,4 @@ galaxy_info:
     - route53
 
 dependencies:
-- mikroways.m7s_base
+- mikroways.m7s_k8s_base
