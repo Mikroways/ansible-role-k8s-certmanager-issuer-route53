@@ -13,8 +13,8 @@ galaxy_info:
       versions: [ 'all' ]
     - name: 'Debian'
       versions: [ 'all' ]
-    - name: 'RedHat'
-      versions: [ '7' ]
+    - name: 'EL'
+      versions: [ '8' ]
 
   galaxy_tags:
     - kubernetes
